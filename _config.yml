@@ -1,0 +1,40 @@
+title: OpenDoc Template #----> Required
+remote_theme: opendocsg/opendoc-theme
+timezone: Asia/Singapore
+repository: opendocsg/opendoc-template #----> Required
+plugins:
+  - jekyll-include-cache
+baseurl: ''
+server_PROD: https://search.opendoc.sg
+server_DEV: https://search-staging.opendoc.sg
+google_analytics:  #----> Optional, Google analytics ID
+
+fast_build: false
+offline: false
+preload_pages: true
+
+styling_options:
+  primary_brand_color: '#444'  #----> Optional, theme color
+  logo_path: /assets/logo.png  #----> Optional, path to logo
+  opendoc_logo_path: /assets/images/logo-full.png
+  feedback_url: https://form.gov.sg/5cee3d46138e3200109244df #----> Optional, feedback url
+  
+folders:
+  - name: '/' #----> '/' for root documents
+    title: 'something'
+    subtitle: this is a subtitle
+    order:
+      - README.md
+      - sample.md
+  - name: 'Document 1'
+    title: 'Document 1'
+    subtitle: hello
+    order:
+      - page1.md
+      - page2.md
+  - name: 'AA Document 2'
+    title: 'This is the second document'
+    subtitle: 'something 2'
+    order:
+      - page1.md
+      - page2.md
