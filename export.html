@@ -1,0 +1,383 @@
+<!-- layout for print export.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="./assets/images/favicon.ico">
+    <link rel="stylesheet" href="./assets/styles/normalize.css">
+    <link rel="stylesheet" href="./assets/styles/main.css">
+  </head>
+
+  <body class="print-content">
+    <section class="description">
+      <img class="description-logo" src="./assets/logo.png">
+      <div class="description-title">Rehabilitation and Protection Group</div>
+    </section>
+
+    <div class="site-main" aria-label="Content" >
+      
+<h1 id="how-to-create-a-new-opendoc">How to create a new Opendoc</h1>
+
+<h2 id="task-list">Task List</h2>
+
+<p><strong>!!! Check that all the tasks below are completed before deployment</strong></p>
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Create new repo from this template</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Update config file (title, icon, color, order, etc…)</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Configure github webhook and secret</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Set up netlify/amplify deployment</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Set PDF Lambda env vars</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />Change domain settings</li>
+</ul>
+
+<h2 id="github">Github</h2>
+
+<p>Step 1:
+Create a new repo, the name of the repo should follow the convention:</p>
+
+<p><code class="language-plaintext highlighter-rouge">opendoc-&lt;name_of_document&gt;</code></p>
+
+<p>Step 2:
+Clone the template repo onto your local machine</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/opendocsg/opendoc-template.git opendoc-&lt;name_of_document&gt;
+</code></pre></div></div>
+
+<p>Step 3: 
+Change the remote url for the repo on your local machine</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git remote set-url origin https://github.com/opendocsg/opendoc-&lt;name_of_document&gt;.git
+</code></pre></div></div>
+<p>or (if you’re using ssh)</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git remote set-url origin git@github.com:opendocsg/opendoc-&lt;name_of_document&gt;.git
+</code></pre></div></div>
+
+<p>Step 4: 
+Add your converted markdown files into the root directory of the repo</p>
+
+<p>Step 5: 
+Update the following fields in the _config.yml file:</p>
+<ul>
+  <li>title (Required)</li>
+  <li>repository (Required)</li>
+  <li>order (Optional)</li>
+  <li>google_analytics(Optional)</li>
+  <li>styling_options
+    <ul>
+      <li>primary_brand_color (Optional)</li>
+      <li>logo_path (Optional)</li>
+    </ul>
+  </li>
+</ul>
+
+<p>Step 6: 
+Commit your changes</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git add .
+git commit -m &lt;commit_message&gt;
+</code></pre></div></div>
+
+<p>Step 7:
+Push your changes to the remote branch</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git push origin master
+</code></pre></div></div>
+
+<p>Step 8:
+Verify changes on Github</p>
+
+<p>Step 9:
+Setup up webhooks for</p>
+<ul>
+  <li>https://search.opendoc.sg/push</li>
+  <li>https://search-staging.opendoc.sg/push</li>
+</ul>
+
+<p>Ensure Content type is set to <code class="language-plaintext highlighter-rouge">application/json</code></p>
+
+<p>Webhook secret is found in 1Password</p>
+
+<h2 id="netlify">Netlify</h2>
+
+<p>Step 1: 
+On Netlify, click on <code class="language-plaintext highlighter-rouge">New site From Git</code></p>
+
+<p>Step 2:
+Select Github &gt; Select repository</p>
+
+<p>Step 3:
+Click on <code class="language-plaintext highlighter-rouge">Deploy Site</code></p>
+
+<p>Step 4:
+Go to <code class="language-plaintext highlighter-rouge">Domain Settings</code> &gt; click on … on the default subdomain  &gt; <code class="language-plaintext highlighter-rouge">Edit site name</code> &gt; Input new netlify site subdomain</p>
+
+<h1 id="user-guide">User Guide</h1>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>In the Rehabilitation and Protection Group (RPG), the Progressive Web Application (PWA) is a mobile-friendly website that is responsible for creating and tracking appointments of Probation Officers and Probationers (referred to as clients in this guide). PWA contains two parts: PWA (Client) and PWA (Caseworker).</p>
+
+<p>The complete workflow of an appointment for clients is:</p>
+
+<p><strong>Viewing Appointments</strong> – After the appointment is created, the Probation Officer and the case client can view the appointment details.</p>
+
+<p><strong>Marking Attendance</strong> – When the case client arrives the appointment venue, the case client needs to proceed check-in attendance taking by scanning the static QR code.</p>
+
+<p><strong>Applying for Leave</strong> – When the case client cannot attend an appointment, they can apply for leave.</p>
+
+<h2 id="abbreviations-and-definitions">Abbreviations and Definitions</h2>
+
+<p>Refer to the following table for the definitions and abbreviations in Probation and Community Rehabilitation Service (PCRS).</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Abbreviation</th>
+      <th>Definition</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>PCRS</td>
+      <td>Probation and Community Rehabilitation Service</td>
+    </tr>
+    <tr>
+      <td>PS</td>
+      <td>Probation Service</td>
+    </tr>
+    <tr>
+      <td>PWA</td>
+      <td>Progressive Web Application</td>
+    </tr>
+    <tr>
+      <td>PO</td>
+      <td>Probation Officer</td>
+    </tr>
+    <tr>
+      <td>LOA</td>
+      <td>Leave of Absence</td>
+    </tr>
+    <tr>
+      <td>MC</td>
+      <td>Medical Certificate</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="overview-of-basic-operations">Overview of Basic Operations</h2>
+
+<p>Below is a brief overview of basic operations that can be performed in PWA.</p>
+
+<ol>
+  <li>
+    <p>Log into the PWA.</p>
+  </li>
+  <li>
+    <p>Choose one of the following actions:</p>
+  </li>
+</ol>
+
+<p>·         Click Login With SingPass if you have a SingPass ID.</p>
+
+<p>·         Click Login Without SingPass to login with the PWA account activated by Probation Officer.</p>
+
+<ol>
+  <li>The home page appears.</li>
+</ol>
+
+<p>A screenshot of a cell phone  Description automatically generated</p>
+
+<p>Figure 1: The home page of Probationer.</p>
+
+<ol>
+  <li>By default, the appointments are displayed in the list view. You can click the calendar view (image006.png) button to display appointments in the calendar view. Then, you can click the list view (image007.png) button to switch back to list view.</li>
+</ol>
+
+<p>A screenshot of a cell phone  Description automatically generated</p>
+
+<p>Figure 2: The calendar view.</p>
+
+<h2 id="managing-passwords">Managing Passwords</h2>
+
+<p>When the Probationer receives the e-mail of newly created PWA account, the account ID and password can be found in the e-mail. After logging into PWA with the account, the Probationer needs to change the password of the new account.</p>
+
+<p>Complete the following steps to change the password of your new account:</p>
+
+<ol>
+  <li>
+    <p>Log into the PWA with the account ID and password in the received e-mail.</p>
+  </li>
+  <li>
+    <p>Complete the following steps to set your account:</p>
+  </li>
+</ol>
+
+<p>A screenshot of a cell phone  Description automatically generated</p>
+
+<p>Figure 3: The set account page.</p>
+
+<p>a.       Change Password – Enter the old password, new password, and confirm new password to set the new password.</p>
+
+<p>b.       Verify the E-mail Address – Your e-mail address is automatically filled in the text box. Check the e-mail address.</p>
+
+<ol>
+  <li>Click Save to save the new password of your account and access the home page.</li>
+</ol>
+
+<p>The Probationer can change password or retrieve password. Complete the following steps to change password or retrieve password:</p>
+
+<ol>
+  <li>
+    <p>In the login page of PWA, click Login Without SingPass.</p>
+  </li>
+  <li>
+    <p>Click Forget Password or Change Password to access the corresponding page.</p>
+  </li>
+</ol>
+
+<p>·         On the Change Password page, complete the following fields and click Save to change the password:</p>
+
+<p>A screenshot of a cell phone  Description automatically generated</p>
+
+<p>Figure 4: The Change Password page.</p>
+
+<p>o   Account – Enter your account name in the text box.</p>
+
+<p>o   New Password – Enter the old password, new password, and confirm new password to set the new password.</p>
+
+<p>·         On the Forget Password page, enter your account name or e-mail address in the text box, and click Send E-mail. In the received e-mail, click the link to access the page where you can reset your password. Enter new password and confirm new password, and then click Save to save the new password.</p>
+
+<h2 id="viewing-appointments">Viewing Appointments</h2>
+
+<p>Probationer can view details of appointments of themselves.</p>
+
+<p>Complete the following steps to view details of an appointment of today or later:</p>
+
+<ol>
+  <li>
+    <p>Log into the PWA. The home page appears.</p>
+  </li>
+  <li>
+    <p>Appointments of today and all upcoming appointments are displayed. You can slide up and down to view more appointments.</p>
+  </li>
+  <li>
+    <p>Click the appointment for which you want to view details, and you’ll be brought to the details page of the appointment.</p>
+  </li>
+</ol>
+
+<p>Complete the followings steps to view details of a historical appointment:</p>
+
+<ol>
+  <li>
+    <p>Log into the PWA. The home page appears.</p>
+  </li>
+  <li>
+    <p>Click your photo and then click Appointment.</p>
+  </li>
+  <li>
+    <p>All your historical appointments are displayed on the Appointment page.</p>
+  </li>
+  <li>
+    <p>Click the appointment for which you want to view details, and you’ll be brought to the details page of the appointment.</p>
+  </li>
+</ol>
+
+<h2 id="marking-attendance">Marking Attendance</h2>
+
+<p>The Probationer needs to submit attendance taking and alert the Probation Officer on your presence by scanning the QR code at the appointment venue.</p>
+
+<p>Complete the followings steps to mark attendance:</p>
+
+<ol>
+  <li>
+    <p>Scan the static QR code when you arrive the appointment venue.</p>
+  </li>
+  <li>
+    <p>In the welcome page, enter your NRIC and click Check-in. The Probation Officer will be notified on your presence.</p>
+  </li>
+  <li>
+    <p>Click Close to close the message.</p>
+  </li>
+</ol>
+
+<h2 id="applying-for-leave">Applying for Leave</h2>
+
+<p>The Probationer can apply for leave to cancel an appointment for which they are unable to attend. Complete the following steps to apply for leave:</p>
+
+<ol>
+  <li>
+    <p>Log into the PWA. The home page appears.</p>
+  </li>
+  <li>
+    <p>Click the appointment for which you want to apply for leave.</p>
+  </li>
+  <li>
+    <p>In the details page of the appointment, click the switch (image015.png) button in the Unable to Attend field.</p>
+  </li>
+  <li>
+    <p>Select an absence type from the Absence Type drop-down list, Medical Leave, Hospital Leave, School Issues, Family Issues, or Others.</p>
+  </li>
+  <li>
+    <p>By default, Current Reporting is selected, which means you are applying for leave for the current appointment. The status of this appointment will be changed to Absent.</p>
+  </li>
+</ol>
+
+<p>Alternatively, click the Time Range field, and the Start and End fields appear. Select a start date and end date to define your duration of absence. The status of all your appointments in this duration will be changed to Absent.</p>
+
+<ol>
+  <li>
+    <p>In the Supporting Document field, click the add (image017.png) button to upload a supporting document for your absence. You can repeat to add multiple supporting documents.</p>
+  </li>
+  <li>
+    <p>Enter remarks for your absence in the Remark text box.</p>
+  </li>
+  <li>
+    <p>Click Submit to submit your leave request.</p>
+  </li>
+</ol>
+
+<h2 id="viewing-notifications">Viewing Notifications</h2>
+
+<p>Probationer can view notifications in PWA.</p>
+
+<p>Complete the followings steps to view notifications in PWA:</p>
+
+<ol>
+  <li>
+    <p>Log into the PWA. The home page appears.</p>
+  </li>
+  <li>
+    <p>Click the notification (image018.png) button in the upper-right corner of the page.</p>
+  </li>
+  <li>
+    <p>All notifications you received are listed in the Notification section.</p>
+  </li>
+</ol>
+
+<h2 id="viewing-resources-and-getting-help">Viewing Resources and Getting Help</h2>
+
+<p>Probationer can view PWA resource and get help and support in PWA.</p>
+
+<p>Complete the followings steps to view resource or get help and support:</p>
+
+<ol>
+  <li>
+    <p>Log into the PWA. The home page appears.</p>
+  </li>
+  <li>
+    <p>Click the photo to view the menu:</p>
+  </li>
+</ol>
+
+<p>·         Click Resource to access the Resource page. The PWA resource of the case client is displayed on the Resource page.</p>
+
+<p>·         Click Help and support to access the Help page. The hotline and e-mail address of the organisations that can provide assistance for Probationer are displayed on this page.</p>
+
+
+    </div>
+  </body>
+
+</html>
