@@ -16,35 +16,18 @@ The complete workflow of an appointment for clients is:
 
 Refer to the following table for the definitions and abbreviations in Probation and Community Rehabilitation Service (PCRS).
 
-Abbreviation
 
-Definition
 
-PCRS
+| Abbreviation | Definition |
+| -------- | -------- |
+| PCRS | Probation and Community Rehabilitation Service  |
+| PS |   Probation Service |
+|  PWA |  Progressive Web Application |
+| PO | Probation Officer |
+| LOA  | Leave of Absence  |
+| MC | Medical Certificate |
 
-Probation and Community Rehabilitation Service
-
-PS
-
-Probation Service
-
-PWA
-
-Progressive Web Application
-
-PO
-
-Probation Officer
-
-LOA
-
-Leave of Absence
-
-MC
-
-Medical Certificate
-
-## Overvoew of Basic Operations
+## Overview of Basic Operations
 
 Below is a brief overview of basic operations that can be performed in PWA.
 
